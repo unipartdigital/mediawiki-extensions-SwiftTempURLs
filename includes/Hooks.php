@@ -19,8 +19,10 @@ class Hooks implements ThumbnailBeforeProduceHTMLHook {
 		$file = $thumbnail->getFile();
 
 		if ( $file ) {
-			$attribs['data-file-width'] = $file->getWidth();
-			$attribs['data-file-height'] = $file->getHeight();
+			$attribs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
+				'ttl' => 60,
+				'src' => $file->getUrl()
+			]);
 		}
 	}
 }

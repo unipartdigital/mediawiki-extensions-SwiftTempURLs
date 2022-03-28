@@ -1,0 +1,25 @@
+{
+	"name": "MultimediaViewer",
+	"author": [
+		"Ash Crosby"
+	],
+	"url": "https://github.org/unipartdigital/mediawiki-extensions-SwiftTempURLs",
+	"descriptionmsg": "Enable Swift temporary URLs on file thumbnails",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\SwiftTempURLs\\": "includes/"
+	},
+	"Hooks": {
+		"ThumbnailBeforeProduceHTML": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\SwiftTempURLs\\Hooks"
+		}
+	},
+	"manifest_version": 2
+}

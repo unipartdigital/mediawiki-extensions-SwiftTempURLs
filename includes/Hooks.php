@@ -11,7 +11,7 @@ namespace MediaWiki\Extension\SwiftTempURLs;
 use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
 
 class Hooks implements ThumbnailBeforeProduceHTMLHook {
-	public static function onThumbnailBeforeProduceHTML(
+	public function onThumbnailBeforeProduceHTML(
 		ThumbnailImage $thumbnail,
 		array &$attribs,
 		&$linkAttribs

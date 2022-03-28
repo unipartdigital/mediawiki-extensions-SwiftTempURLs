@@ -23,7 +23,7 @@ class Hooks implements ThumbnailBeforeProduceHTMLHook {
 		if ( $file ) {
 			$attribs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 				'ttl' => 60,
-				'src' => $file->getUrl()
+				'src' => $file->getPath()
 			]);
 		}
 	}

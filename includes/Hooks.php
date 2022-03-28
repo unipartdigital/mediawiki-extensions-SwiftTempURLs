@@ -36,7 +36,7 @@ class Hooks implements ThumbnailBeforeProduceHTMLHook {
 				$linkAttribs['href'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 					'ttl' => $ttl,
 					'src' => $file->getPath()
-				]);
+				]) . '&inline';
 			}
 		}
 	}

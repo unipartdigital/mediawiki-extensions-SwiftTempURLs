@@ -8,9 +8,10 @@
 
 namespace MediaWiki\Extension\SwiftTempURLs;
 
+use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
+use MediaWiki\MediaWikiServices;
 use ThumbnailImage;
 
-use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
 
 class Hooks implements ThumbnailBeforeProduceHTMLHook {
 	public function onThumbnailBeforeProduceHTML(
@@ -20,11 +21,14 @@ class Hooks implements ThumbnailBeforeProduceHTMLHook {
 	) {
 		$file = $thumbnail->getFile();
 
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'swifttempurls' );
+		$ttl = $config->get( 'SwiftTempURLsTTL' );
+
 		if ( $file ) {
 			unset($attribs['srcset']);
 			if ( !empty($attribs['src']) ) {
 				$attribs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
-					'ttl' => 60,
+					'ttl' => $ttl,
 					'src' => $thumbnail->getStoragePath()
 				]);
 			}

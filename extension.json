@@ -5,6 +5,7 @@
 	],
 	"url": "https://github.org/unipartdigital/mediawiki-extensions-SwiftTempURLs",
 	"descriptionmsg": "Enable Swift temporary URLs on file thumbnails",
+	"version": "1.0",
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
@@ -20,6 +21,15 @@
 		"main": {
 			"class": "MediaWiki\\Extension\\SwiftTempURLs\\Hooks"
 		}
+	},
+	"config": {
+		"SwiftTempURLsTTL": {
+			"value": 60,
+			"description": "TTL for temporary URLS, in seconds"
+		}
+	},
+	"ConfigRegistry": {
+		"swifttempurls": "GlobalVarConfig::newInstance"
 	},
 	"manifest_version": 2
 }

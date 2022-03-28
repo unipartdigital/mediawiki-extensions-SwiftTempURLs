@@ -8,6 +8,8 @@
 
 namespace MediaWiki\Extension\SwiftTempURLs;
 
+use ThumbnailImage;
+
 use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
 
 class Hooks implements ThumbnailBeforeProduceHTMLHook {

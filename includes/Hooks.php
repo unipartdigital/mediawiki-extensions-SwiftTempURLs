@@ -14,8 +14,8 @@ use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
 
 class Hooks implements ThumbnailBeforeProduceHTMLHook {
 	public function onThumbnailBeforeProduceHTML(
-		ThumbnailImage $thumbnail,
-		array &$attribs,
+		$thumbnail,
+		&$attribs,
 		&$linkAttribs
 	) {
 		$file = $thumbnail->getFile();

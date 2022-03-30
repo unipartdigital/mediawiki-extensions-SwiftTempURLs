@@ -18,7 +18,7 @@ if (interface_exists(DiagramsBeforeProduceHTMLHook::class)) {
 	interface DiagramsConditionalHook extends DiagramsBeforeProduceHTMLHook {}
 } else {
 	interface DiagramsConditionalHook {
-		public function onDiagramBeforeProduceHTML(
+		public function onDiagramsBeforeProduceHTML(
 			File $file,
 			array &$imgAttrs
 		);
@@ -56,7 +56,7 @@ class Hooks implements
 		}
 	}
 
-	public function onDiagramBeforeProduceHTML(
+	public function onDiagramsBeforeProduceHTML(
 		File $file,
 		array &$imgAttrs
 	) {

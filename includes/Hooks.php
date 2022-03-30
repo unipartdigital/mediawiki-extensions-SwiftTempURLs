@@ -15,7 +15,7 @@ use ThumbnailImage;
 use File;
 
 if (interface_exists(DiagramsBeforeProduceHTMLHook::class)) {
-	interface DiagramsConditionalHook extends DiagramsBeforeProduceHTMLHook;
+	interface DiagramsConditionalHook extends DiagramsBeforeProduceHTMLHook {}
 } else {
 	interface DiagramsConditionalHook {
 		public function onDiagramBeforeProduceHTML(

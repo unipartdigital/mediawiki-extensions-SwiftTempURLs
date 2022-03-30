@@ -56,7 +56,7 @@ class Hooks implements
 		}
 	}
 
-	public function onDiagramBeforeProduceHTML (
+	public function onDiagramBeforeProduceHTML(
 		File $file,
 		array &$imgAttrs
 	) {

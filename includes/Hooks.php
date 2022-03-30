@@ -9,25 +9,20 @@
 namespace MediaWiki\Extension\SwiftTempURLs;
 
 use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
-use Mediawiki\Extension\Diagrams\Hook\DiagramsBeforeProduceHTMLHook as DiagramsBeforeProduceHTMLHook;
 use MediaWiki\MediaWikiServices;
 use ThumbnailImage;
 use File;
 
-if (interface_exists(DiagramsBeforeProduceHTMLHook::class)) {
-	interface DiagramsConditionalHook extends DiagramsBeforeProduceHTMLHook {}
-} else {
-	interface DiagramsConditionalHook {
-		public function onDiagramsBeforeProduceHTML(
-			File $file,
-			array &$imgAttrs
-		);
-	}
+interface DiagramsBeforeProduceHTMLHook {
+	public function onDiagramsBeforeProduceHTML(
+		File $file,
+		array &$imgAttrs
+	);
 }
 
 class Hooks implements
 	ThumbnailBeforeProduceHTMLHook,
-	DiagramsConditionalHook
+	DiagramsBeforeProduceHTMLHook
 {
 	public function onThumbnailBeforeProduceHTML(
 		$thumbnail,

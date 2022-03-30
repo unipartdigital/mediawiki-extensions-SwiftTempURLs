@@ -15,7 +15,8 @@
 		"MediaWiki\\Extension\\SwiftTempURLs\\": "includes/"
 	},
 	"Hooks": {
-		"ThumbnailBeforeProduceHTML": "main"
+		"ThumbnailBeforeProduceHTML": "main",
+		"DiagramsBeforeProduceHTML": "main"
 	},
 	"HookHandlers": {
 		"main": {

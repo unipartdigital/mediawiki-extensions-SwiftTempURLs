@@ -14,10 +14,8 @@ use MediaWiki\MediaWikiServices;
 use ThumbnailImage;
 use File;
 
-if (interface_exists(DiagramsBeforeProduceHTMLHook::class)) {
-	interface DiagramsConditionalHook extends DiagramsBeforeProduceHTMLHook {}
-} else {
-	interface DiagramsConditionalHook {
+if ( !interface_exists(DiagramsBeforeProduceHTMLHook::class) ) {
+	interface DiagramsBeforeProduceHTMLHook {
 		public function onDiagramsBeforeProduceHTML(
 			File $file,
 			array &$imgAttrs

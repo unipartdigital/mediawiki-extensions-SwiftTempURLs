@@ -40,15 +40,18 @@ class Hooks implements
 		$ttl = $config->get( 'SwiftTempURLsTTL' );
 
 		if ( $file ) {
-			unset($attribs['srcset']);
-			if ( !empty($attribs['src']) ) {
-				$fileSrc = empty($thumbnail->getStoragePath())? $file->getPath(): $thumbnail->getStoragePath();
+			if ( !empty( $attribs['src'] ) ) {
+				if ( preg_match( '/\/resources\/assets\/file-type-icons\//', $attribs['src'] ) ) {
+					return;
+				}
+				unset($attribs['srcset']);
+				$fileSrc = empty( $thumbnail->getStoragePath() )? $file->getPath(): $thumbnail->getStoragePath();
 				$attribs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 					'ttl' => $ttl,
 					'src' => $fileSrc
 				]);
 			}
-			if ( !empty($linkAttribs['href']) ) {
+			if ( !empty( $linkAttribs['href'] ) ) {
 				$linkAttribs['href'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 					'ttl' => $ttl,
 					'src' => $file->getPath()
@@ -61,7 +64,7 @@ class Hooks implements
 		File $file,
 		array &$imgAttrs
 	) {
-		if ( $file && !empty($imgAttrs['src']) ) {
+		if ( $file && !empty( $imgAttrs['src'] ) ) {
 			$imgAttrs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 				'ttl' => $ttl,
 				'src' => $file->getPath()

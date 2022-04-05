@@ -42,9 +42,10 @@ class Hooks implements
 		if ( $file ) {
 			unset($attribs['srcset']);
 			if ( !empty($attribs['src']) ) {
+				$fileSrc = empty($thumbnail->getStoragePath())? $file->getPath(): $thumbnail->getStoragePath();
 				$attribs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 					'ttl' => $ttl,
-					'src' => $thumbnail->getStoragePath()
+					'src' => $fileSrc
 				]);
 			}
 			if ( !empty($linkAttribs['href']) ) {

@@ -9,6 +9,7 @@
 namespace MediaWiki\Extension\SwiftTempURLs;
 
 use MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook;
+use MediaWiki\Hook\LinkerMakeMediaLinkFileHook;
 use Mediawiki\Extension\Diagrams\Hook\DiagramsBeforeProduceHTMLHook as DiagramsBeforeProduceHTMLHook;
 use MediaWiki\MediaWikiServices;
 use ThumbnailImage;
@@ -27,7 +28,8 @@ if (interface_exists(DiagramsBeforeProduceHTMLHook::class)) {
 
 class Hooks implements
 	ThumbnailBeforeProduceHTMLHook,
-	DiagramsConditionalHook
+	DiagramsConditionalHook,
+	LinkerMakeMediaLinkFileHook
 {
 	public function onThumbnailBeforeProduceHTML(
 		$thumbnail,
@@ -64,11 +66,34 @@ class Hooks implements
 		File $file,
 		array &$imgAttrs
 	) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'swifttempurls' );
+		$ttl = $config->get( 'SwiftTempURLsTTL' );
+
 		if ( $file && !empty( $imgAttrs['src'] ) ) {
 			$imgAttrs['src'] = $file->getRepo()->getBackend()->getFileHttpUrl([
 				'ttl' => $ttl,
 				'src' => $file->getPath()
 			]) . '&inline';
 		}
+	}
+
+	public function onLinkerMakeMediaLinkFile(
+		$title,
+		$file,
+		&$html,
+		&$attribs,
+		&$ret
+	) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'swifttempurls' );
+		$ttl = $config->get( 'SwiftTempURLsTTL' );
+
+		if ( $file && $file->exists() ) {
+			$attribs['href'] = $file->getRepo()->getBackend()->getFileHttpUrl([
+				'ttl' => $ttl,
+				'src' => $file->getPath()
+			]) . '&inline';
+		}
+		
+		return true;
 	}
 }

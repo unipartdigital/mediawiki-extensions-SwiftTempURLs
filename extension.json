@@ -16,7 +16,8 @@
 	},
 	"Hooks": {
 		"ThumbnailBeforeProduceHTML": "main",
-		"DiagramsBeforeProduceHTML": "main"
+		"DiagramsBeforeProduceHTML": "main",
+		"LinkerMakeMediaLinkFile": "main"
 	},
 	"HookHandlers": {
 		"main": {
